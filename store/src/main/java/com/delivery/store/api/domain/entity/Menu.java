@@ -28,7 +28,7 @@ public class Menu extends BaseEntity {
     @Column(nullable = false)
     private int price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Store store;
 
