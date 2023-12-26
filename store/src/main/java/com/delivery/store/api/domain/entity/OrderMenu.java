@@ -16,17 +16,17 @@ public class OrderMenu extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 200)
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Order order;
 
-    @Column(nullable = false, length = 200)
-    private String name;
-
     @Builder
-    public OrderMenu(Long id, Order order, String name) {
+    public OrderMenu(Long id, String name, Order order) {
         this.id = id;
-        this.order = order;
         this.name = name;
+        this.order = order;
     }
 }
