@@ -1,5 +1,6 @@
 package com.delivery.store.api.domain.entity;
 
+import com.delivery.store.api.dto.AddMenuRequestDto;
 import com.delivery.store.api.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -40,5 +41,14 @@ public class Menu extends BaseEntity {
         this.thumbnailPath = thumbnailPath;
         this.price = price;
         this.store = store;
+    }
+
+    public static Menu of(AddMenuRequestDto requestDto, Store store) {
+        return Menu.builder()
+                .name(requestDto.name())
+                .description(requestDto.description())
+                .thumbnailPath(requestDto.thumbnailPath())
+                .store(store)
+                .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.delivery.store.api.domain.entity;
 
 
+import com.delivery.store.api.dto.AddOptionRequestDto;
 import com.delivery.store.api.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -33,5 +34,13 @@ public class Option extends BaseEntity {
         this.name = name;
         this.price = price;
         this.menu = menu;
+    }
+
+    public static Option of(AddOptionRequestDto requestDto, Menu menu) {
+        return Option.builder()
+                .name(requestDto.name())
+                .price(requestDto.price())
+                .menu(menu)
+                .build();
     }
 }
