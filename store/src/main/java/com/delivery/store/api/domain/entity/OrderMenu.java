@@ -19,7 +19,7 @@ public class OrderMenu extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private Order order;
 
