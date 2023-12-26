@@ -17,18 +17,23 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 200)
     private String orderName;
 
-    private String userId;
+    @Column(nullable = false)
+    private Long userId;
 
+    @Column(nullable = false, length = 30)
     private String userName;
 
+    @Column(nullable = false, length = 11)
     private String userPhoneNumber;
 
+    @Column(nullable = false)
     private int totalPrice;
 
     @Builder
-    public Order(Long id, String orderName, String userId, String userName, String userPhoneNumber, int totalPrice) {
+    public Order(Long id, String orderName, Long userId, String userName, String userPhoneNumber, int totalPrice) {
         this.id = id;
         this.orderName = orderName;
         this.userId = userId;

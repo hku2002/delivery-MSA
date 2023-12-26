@@ -17,11 +17,14 @@ public class Option extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 200)
     private String name;
 
+    @Column(nullable = false)
     private int price;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Menu menu;
 
     @Builder

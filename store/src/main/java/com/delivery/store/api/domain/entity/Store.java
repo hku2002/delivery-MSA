@@ -1,10 +1,7 @@
 package com.delivery.store.api.domain.entity;
 
 import com.delivery.store.api.global.common.entity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +16,10 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 200)
     private String name;
 
+    @Column(nullable = false, length = 300)
     private String thumbnailPath;
 
     @Builder

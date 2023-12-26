@@ -16,15 +16,20 @@ public class Menu extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 200)
     private String name;
 
+    @Column(length = 400)
     private String description;
 
+    @Column(nullable = false, length = 300)
     private String thumbnailPath;
 
+    @Column(nullable = false)
     private int price;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Store store;
 
     @Builder
