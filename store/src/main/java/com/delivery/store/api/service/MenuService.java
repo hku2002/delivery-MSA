@@ -7,7 +7,9 @@ import com.delivery.store.api.domain.repository.MenuRepository;
 import com.delivery.store.api.domain.repository.OptionRepository;
 import com.delivery.store.api.domain.repository.StoreRepository;
 import com.delivery.store.api.dto.AddMenuRequestDto;
+import com.delivery.store.api.dto.AddMenuResponseDto;
 import com.delivery.store.api.dto.AddOptionRequestDto;
+import com.delivery.store.api.dto.AddOptionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +24,17 @@ public class MenuService {
     private final OptionRepository optionRepository;
 
     @Transactional
-    public void addMenu(AddMenuRequestDto requestDto) {
+    public AddMenuResponseDto addMenu(AddMenuRequestDto requestDto) {
         Store store = storeRepository.findById(requestDto.storeId()).orElseThrow();
-        menuRepository.save(Menu.of(requestDto, store));
+        Menu menu = menuRepository.save(Menu.of(requestDto, store));
+        return new AddMenuResponseDto(menu.getId());
     }
 
     @Transactional
-    public void addOption(AddOptionRequestDto requestDto) {
+    public AddOptionResponseDto addOption(AddOptionRequestDto requestDto) {
         Menu menu = menuRepository.findById(requestDto.menuId()).orElseThrow();
-        optionRepository.save(Option.of(requestDto, menu));
+        Option option = optionRepository.save(Option.of(requestDto, menu));
+        return new AddOptionResponseDto(option.getId());
     }
 
 }
