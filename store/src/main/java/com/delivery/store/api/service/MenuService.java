@@ -6,13 +6,12 @@ import com.delivery.store.api.domain.entity.Store;
 import com.delivery.store.api.domain.repository.MenuRepository;
 import com.delivery.store.api.domain.repository.OptionRepository;
 import com.delivery.store.api.domain.repository.StoreRepository;
-import com.delivery.store.api.dto.AddMenuRequestDto;
-import com.delivery.store.api.dto.AddMenuResponseDto;
-import com.delivery.store.api.dto.AddOptionRequestDto;
-import com.delivery.store.api.dto.AddOptionResponseDto;
+import com.delivery.store.api.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +34,12 @@ public class MenuService {
         Menu menu = menuRepository.findById(requestDto.menuId()).orElseThrow();
         Option option = optionRepository.save(Option.of(requestDto, menu));
         return new AddOptionResponseDto(option.getId());
+    }
+
+    public List<GetMenuResponseDto> getMenu(GetMenuRequestDto requestDto) {
+        Store store = storeRepository.findById(requestDto.storeId()).orElseThrow();
+        List<Menu> menus = menuRepository.findAllByStore(store);
+        return GetMenuResponseDto.from(menus);
     }
 
 }
