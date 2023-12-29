@@ -29,4 +29,3 @@ curl --location --request POST 'http://localhost:8083/connectors' \
   }
 }'
 
-
