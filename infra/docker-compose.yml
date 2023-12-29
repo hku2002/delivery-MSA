@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   zookeeper:
@@ -15,9 +15,11 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#      - KAFKA_CREATE_TOPICS=delivery-connect-configs:1:1,delivery-connect-offsets:1:1
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CREATE_TOPICS=delivery-connect-configs:1:1,delivery-connect-offsets:1:1
+    depends_on:
+      - zookeeper
     networks:
       - delivery-net
 
@@ -30,17 +32,36 @@ services:
       - GROUP_ID=1
       - CONFIG_STORAGE_TOPIC=delivery-connect-configs
       - OFFSET_STORAGE_TOPIC=delivery-connect-offsets
-      - ADVERTISED_HOST_NAME=connect  # 호스트 IP를 명시적으로 지정
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - ADVERTISED_HOST_NAME=connect
     depends_on:
       - zookeeper
       - kafka
+      - mysql
     links:
       - zookeeper
       - kafka
+      - mysql
     networks:
       - delivery-net
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    restart: always
+    networks:
+      - delivery-net
+    volumes:
+      - mysql-data:/var/lib/mysql
 
 networks:
   delivery-net:
     name: delivery-net
+
+volumes:
+  mysql-data:
 
