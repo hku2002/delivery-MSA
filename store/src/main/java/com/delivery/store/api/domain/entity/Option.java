@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Table(name = "options")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Option extends BaseEntity {
 
