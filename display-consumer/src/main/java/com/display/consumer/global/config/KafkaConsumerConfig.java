@@ -15,27 +15,27 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServer;
+    @Value("${spring.kafka.consumer.bootstrap-servers}")
+    private String bootstrapServers;
 
-    @Value("${spring.kafka.key-deserializer}")
+    @Value("${spring.kafka.consumer.key-deserializer}")
     private String keyDeserializer;
 
-    @Value("${spring.kafka.value-deserializer}")
+    @Value("${spring.kafka.consumer.value-deserializer}")
     private String valueDeserializer;
 
-    @Bean
-    ConcurrentKafkaListenerContainerFactory<Object, Object> batchKafkaListenerContainerFactory() {
+    @Bean("KafkaListenerContainerFactory")
+    public ConcurrentKafkaListenerContainerFactory<Object, Object> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Object, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(batchConsumerFactory());
+        factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
         factory.setConcurrency(1);
         return factory;
     }
 
-    public Map<String, Object> batchConsumerConfig() {
+    public Map<String, Object> consumerConfig() {
         return Map.of(
-                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer,
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, keyDeserializer,
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, valueDeserializer,
                 ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 150,
@@ -44,8 +44,8 @@ public class KafkaConsumerConfig {
         );
     }
 
-    public ConsumerFactory<Object, Object> batchConsumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(batchConsumerConfig());
+    public ConsumerFactory<Object, Object> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
 }
