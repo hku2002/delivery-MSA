@@ -1,4 +1,4 @@
-package com.display.consumer.entity;
+package com.display.consumer.domain.entity;
 
 import com.display.consumer.global.common.entity.BaseEntity;
 import jakarta.persistence.*;

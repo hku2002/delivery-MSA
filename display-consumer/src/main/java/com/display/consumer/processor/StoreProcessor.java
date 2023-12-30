@@ -1,7 +1,7 @@
 package com.display.consumer.processor;
 
 import com.display.consumer.dto.MenuDto;
-import com.display.consumer.entity.Menu;
+import com.display.consumer.domain.entity.Menu;
 import com.display.consumer.reader.StoreReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

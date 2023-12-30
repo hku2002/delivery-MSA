@@ -1,6 +1,6 @@
-package com.display.consumer.repository;
+package com.display.consumer.domain.repository;
 
-import com.display.consumer.entity.Store;
+import com.display.consumer.domain.entity.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.display.consumer.entity.enumtype;
+package com.display.consumer.domain.enumtype;
 
 import lombok.Getter;
 

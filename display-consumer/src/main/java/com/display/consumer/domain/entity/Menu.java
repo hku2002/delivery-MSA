@@ -1,4 +1,4 @@
-package com.display.consumer.entity;
+package com.display.consumer.domain.entity;
 
 import com.display.consumer.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Store extends BaseEntity {
+public class Menu extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +19,27 @@ public class Store extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String name;
 
+    @Column(length = 400)
+    private String description;
+
     @Column(nullable = false, length = 300)
     private String thumbnailPath;
 
+    @Column(nullable = false)
+    private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(nullable = false)
+    private Store store;
+
     @Builder
-    public Store(Long id, String name, String thumbnailPath) {
+    public Menu(Long id, String name, String description, String thumbnailPath, int price, Store store) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.thumbnailPath = thumbnailPath;
+        this.price = price;
+        this.store = store;
     }
+
 }

@@ -2,7 +2,7 @@ package com.display.consumer.listener;
 
 import com.display.consumer.dto.MenuDto;
 import com.display.consumer.dto.StoreListenDto;
-import com.display.consumer.entity.Menu;
+import com.display.consumer.domain.entity.Menu;
 import com.display.consumer.processor.StoreProcessor;
 import com.display.consumer.reader.StoreReader;
 import com.fasterxml.jackson.core.JsonProcessingException;

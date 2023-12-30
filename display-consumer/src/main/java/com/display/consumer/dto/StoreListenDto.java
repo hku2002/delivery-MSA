@@ -1,8 +1,8 @@
 package com.display.consumer.dto;
 
-import com.display.consumer.entity.enumtype.Action;
-import com.display.consumer.entity.enumtype.Operation;
-import com.display.consumer.entity.enumtype.OutboxStatus;
+import com.display.consumer.domain.enumtype.Action;
+import com.display.consumer.domain.enumtype.Operation;
+import com.display.consumer.domain.enumtype.OutboxStatus;
 import com.display.consumer.global.common.dto.BaseListenDto;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
