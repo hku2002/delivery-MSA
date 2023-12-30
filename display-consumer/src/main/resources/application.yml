@@ -19,6 +19,13 @@ spring:
     open-in-view: false
     database: mysql
 
+  kafka:
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap-servers: kafka:9092
+    consumer:
+      auto-offset-reset: latest
+
 logging:
   level:
     org.hibernate.SQL: debug
