@@ -4,27 +4,30 @@ import com.display.consumer.entity.enumtype.Action;
 import com.display.consumer.entity.enumtype.Operation;
 import com.display.consumer.entity.enumtype.OutboxStatus;
 import com.display.consumer.global.common.dto.BaseListenDto;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class StoreListenDto extends BaseListenDto {
 
-    private final Long id;
-    private final Long uniqueId;
+    private Long id;
+    private Long uniqueId;
     @Enumerated(EnumType.STRING)
-    private final Action action;
+    private Action action;
     @Enumerated(EnumType.STRING)
-    private final Operation operation;
+    private Operation operation;
     @Enumerated(EnumType.STRING)
-    private final OutboxStatus status;
+    private OutboxStatus status;
 
     @Builder
-    public StoreListenDto(Character metaOperation, String metaTable, LocalDateTime createdAt, LocalDateTime updatedAt, Long id, Long uniqueId, Action action, Operation operation, OutboxStatus status) {
+    public StoreListenDto(Character metaOperation, String metaTable, Long createdAt, Long updatedAt, Long id, Long uniqueId, Action action, Operation operation, OutboxStatus status) {
         super(metaOperation, metaTable, createdAt, updatedAt);
         this.id = id;
         this.uniqueId = uniqueId;

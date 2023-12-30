@@ -1,39 +1,25 @@
 package com.display.consumer.global.common.dto;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-
-import java.time.LocalDateTime;
-import java.util.Map;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class BaseListenDto {
 
-    private final Character metaOperation;
-    private final String metaTable;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
+    private Character metaOp;
+    private String metaTable;
+    private Long createdAt;
+    private Long updatedAt;
 
-    public BaseListenDto(Character metaOperation, String metaTable, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.metaOperation = metaOperation;
+    public BaseListenDto(Character metaOp, String metaTable, Long createdAt, Long updatedAt) {
+        this.metaOp = metaOp;
         this.metaTable = metaTable;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public static BaseListenDto from(ConsumerRecord<String, String> consumerRecord) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> recordMap = objectMapper.readValue(consumerRecord.value(), new TypeReference<>() {
-        });
-
-        Character metaOperation = String.valueOf(recordMap.get("meta_op")).charAt(0);
-        String metaTable = String.valueOf(recordMap.get("meta_table"));
-//        String createdAt = String.valueOf(recordMap.get("createdAt"));
-//        String updatedAt = String.valueOf(recordMap.get("updatedAt"));
-
-        return new BaseListenDto(metaOperation, metaTable, null, null);
-    }
 }
