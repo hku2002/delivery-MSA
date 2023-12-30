@@ -42,4 +42,22 @@ public class Outbox extends BaseEntity {
         this.operation = operation;
         this.status = status;
     }
+
+    public static Outbox of(Menu menu, Action action, Operation operation, OutboxStatus status) {
+        return Outbox.builder()
+                .uniqueId(menu.getId())
+                .action(action)
+                .operation(operation)
+                .status(status)
+                .build();
+    }
+
+    public static Outbox of(Option menu, Action action, Operation operation, OutboxStatus status) {
+        return Outbox.builder()
+                .uniqueId(menu.getId())
+                .action(action)
+                .operation(operation)
+                .status(status)
+                .build();
+    }
 }
