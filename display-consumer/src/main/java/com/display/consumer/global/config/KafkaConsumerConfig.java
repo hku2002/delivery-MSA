@@ -16,7 +16,7 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;
+    private String bootstrapServer;
 
     @Value("${spring.kafka.key-deserializer}")
     private String keyDeserializer;
@@ -24,8 +24,8 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.value-deserializer}")
     private String valueDeserializer;
 
-    @Bean("batchKafkaListenerContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<Object, Object> batchKafkaListenerContainerFactory() {
+    @Bean
+    ConcurrentKafkaListenerContainerFactory<Object, Object> batchKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Object, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(batchConsumerFactory());
         factory.setBatchListener(true);
@@ -35,7 +35,7 @@ public class KafkaConsumerConfig {
 
     public Map<String, Object> batchConsumerConfig() {
         return Map.of(
-                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer,
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, keyDeserializer,
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, valueDeserializer,
                 ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 150,
