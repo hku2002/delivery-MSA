@@ -28,7 +28,10 @@ curl --location --request POST 'http://localhost:8083/connectors' \
     "transforms.unwrap.add.fields.prefix": "meta_",
     "transforms.addTopicPrefix.type":"org.apache.kafka.connect.transforms.RegexRouter",
     "transforms.addTopicPrefix.regex":"(.*)",
-    "transforms.addTopicPrefix.replacement":"$1"
+    "transforms.addTopicPrefix.replacement":"$1",
+    "transforms.convertTimezone.type":"io.debezium.transforms.TimezoneConverter",
+    "transforms.convertTimezone.converted.timezone":"Asia/Seoul",
+    "time.precision.mode":"connect"
   }
 }'
 
