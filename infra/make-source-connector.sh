@@ -17,7 +17,7 @@ curl --location --request POST 'http://localhost:8083/connectors' \
     "database.include.list": "store",
     "database.history.kafka.bootstrap.servers": "kafka:9092",
     "database.history.kafka.topic": "dbhistory.mysql",
-    "table.include.list": "store.menu",
+    "table.include.list": "store.outbox",
     "key.converter": "org.apache.kafka.connect.json.JsonConverter",
     "key.converter.schemas.enable": "true",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
