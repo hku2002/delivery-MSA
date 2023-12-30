@@ -78,10 +78,23 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    ports:
+      - "27017:27017"
+    command: [ "mongod" ]
+    networks:
+      - delivery-net
+    volumes:
+      - /Users/hwang/DataRepo/mongodb:/data/db
+
 networks:
   delivery-net:
     name: delivery-net
 
 volumes:
   mysql-data:
-
