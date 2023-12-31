@@ -1,4 +1,4 @@
-package com.display.consumer.domain.repository;
+package com.display.consumer.domain.repository.jpa;
 
 import com.display.consumer.domain.entity.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
