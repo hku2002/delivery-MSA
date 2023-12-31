@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Document(collation = "display_store")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class displayStore extends BaseDocument {
+public class DisplayStore extends BaseDocument {
 
     @Id
     private Long id;
