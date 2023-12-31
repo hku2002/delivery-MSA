@@ -1,10 +1,12 @@
 package com.display.consumer.listener;
 
+import com.display.consumer.domain.document.DisplayStore;
 import com.display.consumer.dto.MenuDto;
 import com.display.consumer.dto.StoreListenDto;
 import com.display.consumer.domain.entity.Menu;
 import com.display.consumer.processor.StoreProcessor;
 import com.display.consumer.reader.StoreReader;
+import com.display.consumer.writer.DisplayStoreWriter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ public class StoreListener {
 
     private final StoreReader storeReader;
     private final StoreProcessor storeProcessor;
+    private final DisplayStoreWriter displayStoreWriter;
 
     @KafkaListener(topics = "mysql.store.outbox", groupId = "display-group")
     public void consumeStoreOutboxTopic(String message) throws JsonProcessingException {
@@ -30,8 +33,9 @@ public class StoreListener {
         Menu menu = storeReader.findMenu(storeListenDto.getUniqueId());
         MenuDto menuDto = storeProcessor.storeProcess(menu);
         log.info("menuDto name: {}", menuDto.getName());
-        // TODO storeWriter
 
+        DisplayStore writer = displayStoreWriter.displayStoreWrite(menuDto);
+        log.info("writer name : {}", writer.getName());
     }
 
 }
