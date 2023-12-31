@@ -11,6 +11,12 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/display
+      username: root
+      password: 1234
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
