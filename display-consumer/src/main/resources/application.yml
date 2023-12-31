@@ -13,9 +13,8 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/display
-      username: root
-      password: 1234
+      uri: mongodb://root:1234@localhost:27017
+      database: display
 
   jpa:
     defer-datasource-initialization: true
