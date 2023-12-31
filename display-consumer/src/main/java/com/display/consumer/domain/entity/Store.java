@@ -22,10 +22,14 @@ public class Store extends BaseEntity {
     @Column(nullable = false, length = 300)
     private String thumbnailPath;
 
+    @Column(nullable = false)
+    private int deliveryFee;
+
     @Builder
-    public Store(Long id, String name, String thumbnailPath) {
+    public Store(Long id, String name, String thumbnailPath, int deliveryFee) {
         this.id = id;
         this.name = name;
         this.thumbnailPath = thumbnailPath;
+        this.deliveryFee = deliveryFee;
     }
 }
