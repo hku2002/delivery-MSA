@@ -1,11 +1,14 @@
 package com.order.api.domain.entity;
 
+import com.order.api.dto.OrderMenuRequestDto;
 import com.order.api.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @Entity
@@ -40,5 +43,20 @@ public class OrderMenu extends BaseEntity {
         this.thumbnailPath = thumbnailPath;
         this.price = price;
         this.order = order;
+    }
+
+    public static OrderMenu from(OrderMenuRequestDto requestDto) {
+        return OrderMenu.builder()
+                .name(requestDto.getName())
+                .description(requestDto.getDescription())
+                .thumbnailPath(requestDto.getThumbnailPath())
+                .price(requestDto.getPrice())
+                .build();
+    }
+
+    public static List<OrderMenu> from(List<OrderMenuRequestDto> requestDtos) {
+        return requestDtos.stream()
+                .map(OrderMenu::from)
+                .toList();
     }
 }

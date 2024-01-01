@@ -1,6 +1,7 @@
 package com.order.api.domain.entity;
 
 import com.order.api.domain.enumtype.OrderStatus;
+import com.order.api.dto.OrderRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,5 +41,12 @@ public class Order {
         this.storeId = storeId;
         this.storeName = storeName;
         this.status = status;
+    }
+
+    public static Order from(OrderRequestDto requestDto) {
+        return Order.builder()
+                .storeId(requestDto.getStoreId())
+                .status(OrderStatus.REQUEST)
+                .build();
     }
 }
