@@ -7,6 +7,9 @@ import lombok.Getter;
 @Getter
 public class OrderMenuOptionRequestDto {
 
+    @Schema(description = "메뉴 ID", example = "1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private Long menuId;
+
     @Schema(description = "옵션명", example = "고수 추가", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String name;
 

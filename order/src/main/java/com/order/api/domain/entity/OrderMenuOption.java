@@ -26,7 +26,6 @@ public class OrderMenuOption extends BaseEntity {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(nullable = false)
     private OrderMenu menu;
 
     @Builder

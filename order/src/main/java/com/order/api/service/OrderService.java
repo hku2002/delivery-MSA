@@ -31,7 +31,7 @@ public class OrderService {
         order.addOrderName(requestDto);
         orderRepository.save(order);
 
-        List<OrderMenu> orderMenuList = OrderMenu.from(requestDto.getOrderMenu());
+        List<OrderMenu> orderMenuList = OrderMenu.of(requestDto.getOrderMenu(), order);
         orderMenuRepository.saveAll(orderMenuList);
 
         List<OrderMenuOptionRequestDto> options = requestDto.getOrderMenu().stream()

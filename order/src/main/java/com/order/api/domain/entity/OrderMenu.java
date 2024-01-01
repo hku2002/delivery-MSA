@@ -37,16 +37,17 @@ public class OrderMenu extends BaseEntity {
         this.order = order;
     }
 
-    public static OrderMenu from(OrderMenuRequestDto requestDto) {
+    public static OrderMenu of(OrderMenuRequestDto requestDto, Order order) {
         return OrderMenu.builder()
                 .name(requestDto.getName())
                 .price(requestDto.getPrice())
+                .order(order)
                 .build();
     }
 
-    public static List<OrderMenu> from(List<OrderMenuRequestDto> requestDtos) {
+    public static List<OrderMenu> of(List<OrderMenuRequestDto> requestDtos, Order order) {
         return requestDtos.stream()
-                .map(OrderMenu::from)
+                .map(orderMenu -> OrderMenu.of(orderMenu, order))
                 .toList();
     }
 }
