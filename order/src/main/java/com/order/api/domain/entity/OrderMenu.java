@@ -28,12 +28,17 @@ public class OrderMenu extends BaseEntity {
     @Column(nullable = false)
     private int price;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(nullable = false)
+    private Order order;
+
     @Builder
-    public OrderMenu(Long id, String name, String description, String thumbnailPath, int price) {
+    public OrderMenu(Long id, String name, String description, String thumbnailPath, int price, Order order) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.thumbnailPath = thumbnailPath;
         this.price = price;
+        this.order = order;
     }
 }
