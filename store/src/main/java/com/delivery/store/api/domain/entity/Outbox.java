@@ -1,8 +1,8 @@
 package com.delivery.store.api.domain.entity;
 
-import com.delivery.store.api.domain.entity.enumtype.Action;
-import com.delivery.store.api.domain.entity.enumtype.Operation;
-import com.delivery.store.api.domain.entity.enumtype.OutboxStatus;
+import com.delivery.store.api.domain.enumtype.Action;
+import com.delivery.store.api.domain.enumtype.Operation;
+import com.delivery.store.api.domain.enumtype.OutboxStatus;
 import com.delivery.store.api.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

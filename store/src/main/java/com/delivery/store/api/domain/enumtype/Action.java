@@ -1,4 +1,4 @@
-package com.delivery.store.api.domain.entity.enumtype;
+package com.delivery.store.api.domain.enumtype;
 
 import lombok.Getter;
 

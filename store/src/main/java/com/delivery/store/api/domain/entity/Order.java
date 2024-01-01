@@ -1,6 +1,6 @@
 package com.delivery.store.api.domain.entity;
 
-import com.delivery.store.api.domain.entity.enumtype.OrderStatus;
+import com.delivery.store.api.domain.enumtype.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
