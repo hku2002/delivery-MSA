@@ -1,6 +1,8 @@
 package com.order.api.domain.entity;
 
 import com.order.api.domain.enumtype.OrderStatus;
+import com.order.api.dto.OrderMenuOptionRequestDto;
+import com.order.api.dto.OrderMenuRequestDto;
 import com.order.api.dto.OrderRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -46,7 +48,30 @@ public class Order {
     public static Order from(OrderRequestDto requestDto) {
         return Order.builder()
                 .storeId(requestDto.getStoreId())
+                .storeName(requestDto.getStoreName())
                 .status(OrderStatus.REQUEST)
                 .build();
+    }
+
+    public void addOrderName(OrderRequestDto requestDto) {
+        int menuSize = requestDto.getOrderMenu().size();
+        if (menuSize > 1) {
+            this.name = requestDto.getOrderMenu().get(0).getName() + " 외 " + menuSize;
+            return;
+        }
+        this.name = requestDto.getOrderMenu().get(0).getName();
+    }
+
+    public void addTotalPrice(OrderRequestDto requestDto) {
+        int optionTotalPrice = requestDto.getOrderMenu().stream()
+                .flatMap(orderMenu -> orderMenu.getOptions().stream())
+                .mapToInt(OrderMenuOptionRequestDto::getPrice)
+                .sum();
+
+        int menuTotalPrice = requestDto.getOrderMenu().stream()
+                .mapToInt(OrderMenuRequestDto::getPrice)
+                .sum();
+
+        this.totalPrice = optionTotalPrice + menuTotalPrice;
     }
 }

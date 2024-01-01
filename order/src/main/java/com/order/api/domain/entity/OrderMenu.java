@@ -22,12 +22,6 @@ public class OrderMenu extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String name;
 
-    @Column(length = 400)
-    private String description;
-
-    @Column(nullable = false, length = 300)
-    private String thumbnailPath;
-
     @Column(nullable = false)
     private int price;
 
@@ -36,11 +30,9 @@ public class OrderMenu extends BaseEntity {
     private Order order;
 
     @Builder
-    public OrderMenu(Long id, String name, String description, String thumbnailPath, int price, Order order) {
+    public OrderMenu(Long id, String name, int price, Order order) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.thumbnailPath = thumbnailPath;
         this.price = price;
         this.order = order;
     }
@@ -48,8 +40,6 @@ public class OrderMenu extends BaseEntity {
     public static OrderMenu from(OrderMenuRequestDto requestDto) {
         return OrderMenu.builder()
                 .name(requestDto.getName())
-                .description(requestDto.getDescription())
-                .thumbnailPath(requestDto.getThumbnailPath())
                 .price(requestDto.getPrice())
                 .build();
     }

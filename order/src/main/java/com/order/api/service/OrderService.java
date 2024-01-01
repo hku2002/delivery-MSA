@@ -26,7 +26,10 @@ public class OrderService {
 
     @Transactional
     public OrderResponseDto createOrder(OrderRequestDto requestDto) {
-        Order order = orderRepository.save(Order.from(requestDto));
+        Order order = Order.from(requestDto);
+        order.addTotalPrice(requestDto);
+        order.addOrderName(requestDto);
+        orderRepository.save(order);
 
         List<OrderMenu> orderMenuList = OrderMenu.from(requestDto.getOrderMenu());
         orderMenuRepository.saveAll(orderMenuList);
