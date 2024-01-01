@@ -8,6 +8,7 @@ import com.order.api.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +18,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/order")
-    public ResponseEntity<BaseResponse<OrderResponseDto>> createOrder(OrderRequestDto requestDto) {
+    public ResponseEntity<BaseResponse<OrderResponseDto>> createOrder(@RequestBody OrderRequestDto requestDto) {
         return CommonResponse.success(orderService.createOrder(requestDto));
     }
 
