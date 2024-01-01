@@ -1,5 +1,6 @@
 package com.order.api.domain.entity;
 
+import com.order.api.domain.enumtype.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -20,20 +21,24 @@ public class Order {
     private String name;
 
     @Column(nullable = false)
-    private String totalPrice;
+    private int totalPrice;
 
     @Column(nullable = false)
     private Long storeId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String storeName;
 
+    @Column(nullable = false, length = 20)
+    private OrderStatus status;
+
     @Builder
-    public Order(Long id, String name, String totalPrice, Long storeId, String storeName) {
+    public Order(Long id, String name, int totalPrice, Long storeId, String storeName, OrderStatus status) {
         this.id = id;
         this.name = name;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
         this.storeName = storeName;
+        this.status = status;
     }
 }
