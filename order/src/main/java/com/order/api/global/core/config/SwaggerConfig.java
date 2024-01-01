@@ -14,9 +14,9 @@ public class SwaggerConfig {
     public OpenAPI openApi() {
         return new OpenAPI()
                 .info(
-                        new Info().title("user API 서버")
+                        new Info().title("order API 서버")
                                 .version("v1.0")
-                                .description("user API 명세서")
+                                .description("order API 명세서")
                 );
     }
 
