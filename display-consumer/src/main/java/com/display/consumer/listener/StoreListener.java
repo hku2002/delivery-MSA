@@ -1,9 +1,9 @@
 package com.display.consumer.listener;
 
 import com.display.consumer.domain.document.DisplayStore;
+import com.display.consumer.domain.entity.Option;
 import com.display.consumer.dto.MenuDto;
 import com.display.consumer.dto.StoreListenDto;
-import com.display.consumer.domain.entity.Menu;
 import com.display.consumer.processor.StoreProcessor;
 import com.display.consumer.reader.StoreReader;
 import com.display.consumer.writer.DisplayStoreWriter;
@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -30,8 +32,8 @@ public class StoreListener {
         StoreListenDto storeListenDto = objectMapper.readValue(message, StoreListenDto.class);
         log.info("dto action: {}", storeListenDto.getAction());
 
-        Menu menu = storeReader.findMenu(storeListenDto.getUniqueId());
-        MenuDto menuDto = storeProcessor.storeProcess(menu);
+        List<Option> options = storeReader.findMenu(storeListenDto.getUniqueId());
+        MenuDto menuDto = storeProcessor.storeProcess(options);
         log.info("menuDto name: {}", menuDto.getName());
 
         DisplayStore writer = displayStoreWriter.displayStoreWrite(menuDto);
