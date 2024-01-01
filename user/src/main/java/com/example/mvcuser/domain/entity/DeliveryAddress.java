@@ -14,9 +14,16 @@ public class DeliveryAddress extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 150)
     private String address;
+
+    @Column(nullable = false, length = 5)
     private String zipCode;
+
+    @Column(nullable = false)
     private boolean isDefault;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 

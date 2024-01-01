@@ -16,10 +16,20 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 100)
     private String email;
+
+    @Column(nullable = false, length = 100)
     private String password; // TODO hash 암호화
+
+    @Column(nullable = false, length = 20)
     private String name;
+
+    @Column(nullable = false, length = 200)
     private String grade;
+
+    @Column(nullable = false)
     private int orderCount;
 
     @Builder
