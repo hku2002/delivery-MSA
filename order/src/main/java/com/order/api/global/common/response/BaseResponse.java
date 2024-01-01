@@ -1,4 +1,4 @@
-package com.example.mvcuser.global.common.response;
+package com.order.api.global.common.response;
 
 import lombok.Getter;
 

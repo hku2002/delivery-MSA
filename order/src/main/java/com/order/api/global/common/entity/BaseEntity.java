@@ -1,4 +1,4 @@
-package com.example.mvcuser.global.common.entity;
+package com.order.api.global.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
