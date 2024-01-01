@@ -30,14 +30,10 @@ public class StoreListener {
         log.info("message: {}", message);
         ObjectMapper objectMapper = new ObjectMapper();
         StoreListenDto storeListenDto = objectMapper.readValue(message, StoreListenDto.class);
-        log.info("dto action: {}", storeListenDto.getAction());
 
         List<Option> options = storeReader.findMenu(storeListenDto.getUniqueId());
         MenuDto menuDto = storeProcessor.storeProcess(options);
-        log.info("menuDto name: {}", menuDto.getName());
-
         DisplayStore writer = displayStoreWriter.displayStoreWrite(menuDto);
-        log.info("writer name : {}", writer.getName());
     }
 
 }
