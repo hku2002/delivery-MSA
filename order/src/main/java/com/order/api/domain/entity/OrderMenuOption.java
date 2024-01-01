@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -25,15 +26,16 @@ public class OrderMenuOption extends BaseEntity {
     @Column(nullable = false)
     private int price;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private OrderMenu menu;
+    private OrderMenu orderMenu;
 
     @Builder
-    public OrderMenuOption(Long id, String name, int price, OrderMenu menu) {
+    public OrderMenuOption(Long id, String name, int price, OrderMenu orderMenu) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.menu = menu;
+        this.addOrderMenu(orderMenu);
     }
 
     public static OrderMenuOption from(OrderMenuOptionRequestDto requestDto) {
@@ -48,5 +50,12 @@ public class OrderMenuOption extends BaseEntity {
                 .map(OrderMenuOption::from)
                 .toList();
 
+    }
+
+    public void addOrderMenu(OrderMenu orderMenu) {
+        if (ObjectUtils.isEmpty(orderMenu)) {
+            return;
+        }
+        this.orderMenu = orderMenu;
     }
 }

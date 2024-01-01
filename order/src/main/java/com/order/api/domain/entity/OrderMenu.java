@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,12 +30,16 @@ public class OrderMenu extends BaseEntity {
     @JoinColumn(nullable = false)
     private Order order;
 
+    @OneToMany(mappedBy = "orderMenu", fetch = FetchType.LAZY)
+    private List<OrderMenuOption> orderMenuOptions = new ArrayList<>();
+
     @Builder
-    public OrderMenu(Long id, String name, int price, Order order) {
+    public OrderMenu(Long id, String name, int price, Order order, List<OrderMenuOption> orderMenuOptions) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.order = order;
+        this.orderMenuOptions = orderMenuOptions;
     }
 
     public static OrderMenu of(OrderMenuRequestDto requestDto, Order order) {
@@ -42,6 +47,7 @@ public class OrderMenu extends BaseEntity {
                 .name(requestDto.getName())
                 .price(requestDto.getPrice())
                 .order(order)
+                .orderMenuOptions(OrderMenuOption.from(requestDto.getOptions()))
                 .build();
     }
 
