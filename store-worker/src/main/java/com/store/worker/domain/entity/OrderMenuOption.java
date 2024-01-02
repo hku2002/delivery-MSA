@@ -1,6 +1,6 @@
 package com.store.worker.domain.entity;
 
-import com.order.worker.global.common.entity.BaseEntity;
+import com.store.worker.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

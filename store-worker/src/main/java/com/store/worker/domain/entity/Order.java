@@ -1,6 +1,6 @@
 package com.store.worker.domain.entity;
 
-import com.order.worker.domain.enumtype.OrderStatus;
+import com.store.worker.domain.enumtype.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -41,13 +41,6 @@ public class Order {
         this.storeId = storeId;
         this.storeName = storeName;
         this.status = status;
-    }
-
-    public void changStatusSent() {
-        if (this.status != OrderStatus.REQUEST) {
-            throw new IllegalStateException();
-        }
-        this.status = OrderStatus.SENT;
     }
 
 }
