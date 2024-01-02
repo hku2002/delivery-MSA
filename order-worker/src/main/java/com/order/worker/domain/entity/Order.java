@@ -29,6 +29,7 @@ public class Order {
     @Column(nullable = false, length = 200)
     private String storeName;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private OrderStatus status;
 
@@ -40,6 +41,13 @@ public class Order {
         this.storeId = storeId;
         this.storeName = storeName;
         this.status = status;
+    }
+
+    public void changStatusSent() {
+        if (this.status != OrderStatus.REQUEST) {
+            throw new IllegalStateException();
+        }
+        this.status = OrderStatus.SENT;
     }
 
 }
