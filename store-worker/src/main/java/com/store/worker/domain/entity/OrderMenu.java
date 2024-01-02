@@ -7,9 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,16 +26,12 @@ public class OrderMenu extends BaseEntity {
     @JoinColumn(nullable = false)
     private Order order;
 
-    @OneToMany(mappedBy = "orderMenu", fetch = FetchType.LAZY)
-    private List<OrderMenuOption> orderMenuOptions = new ArrayList<>();
-
     @Builder
-    public OrderMenu(Long id, String name, int price, Order order, List<OrderMenuOption> orderMenuOptions) {
+    public OrderMenu(Long id, String name, int price, Order order) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.order = order;
-        this.orderMenuOptions = orderMenuOptions;
     }
 
 }
