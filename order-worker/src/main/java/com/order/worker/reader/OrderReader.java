@@ -18,13 +18,12 @@ public class OrderReader {
     private final OrderMenuOptionRepository orderMenuOptionRepository;
     private final OrderProcessor orderProcessor;
 
-    public List<OrderMenuOption> readRequestedOrder() {
+    public void readRequestedOrder() {
         List<OrderMenuOption> orderMenuOptions = orderMenuOptionRepository.findAllByOrderStatus(OrderStatus.REQUEST);
         if (orderMenuOptions.isEmpty()) {
-            return null;
+            return;
         }
         orderProcessor.createOrderSendDto(orderMenuOptions);
-        return orderMenuOptions;
     }
 
 }
