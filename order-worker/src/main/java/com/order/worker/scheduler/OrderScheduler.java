@@ -17,7 +17,6 @@ public class OrderScheduler {
     public void createOrderCheckSchedule() {
         log.info("check success");
         orderReader.readRequestedOrder();
-
     }
 
 }
