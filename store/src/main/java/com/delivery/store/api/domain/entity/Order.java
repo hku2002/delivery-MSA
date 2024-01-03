@@ -40,7 +40,7 @@ public class Order {
     }
 
     public void changeOrderComplete() {
-        if (this.status != OrderStatus.SENT) {
+        if (this.status != OrderStatus.REQUEST) {
             throw new IllegalStateException();
         }
         this.status = OrderStatus.COMPLETED;
