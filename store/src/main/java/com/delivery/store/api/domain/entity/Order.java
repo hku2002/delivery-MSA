@@ -43,4 +43,11 @@ public class Order {
         this.status = status;
     }
 
+    public void changeOrderComplete() {
+        if (this.status != OrderStatus.SENT) {
+            throw new IllegalStateException();
+        }
+        this.status = OrderStatus.COMPLETED;
+    }
+
 }
