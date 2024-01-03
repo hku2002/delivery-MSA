@@ -13,12 +13,14 @@ public class MenuSendDto {
     private Long menuId;
     private String menuName;
     private int menuPrice;
+    private List<OptionSendDto> options;
 
     @Builder
-    public MenuSendDto(Long menuId, String menuName, int menuPrice) {
+    public MenuSendDto(Long menuId, String menuName, int menuPrice, List<OptionSendDto> options) {
         this.menuId = menuId;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
+        this.options = options;
     }
 
     public static MenuSendDto from(OrderMenu orderMenu) {
@@ -26,6 +28,7 @@ public class MenuSendDto {
                 .menuId(orderMenu.getId())
                 .menuName(orderMenu.getName())
                 .menuPrice(orderMenu.getPrice())
+                .options(OptionSendDto.from(orderMenu.getOrderMenuOptions()))
                 .build();
     }
 

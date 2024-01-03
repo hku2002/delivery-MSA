@@ -16,17 +16,15 @@ public class OrderSendDto {
     private Long storeId;
     private OrderStatus status;
     private List<MenuSendDto> menus;
-    private List<OptionSendDto> options;
 
     @Builder
-    public OrderSendDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuSendDto> menus, List<OptionSendDto> options) {
+    public OrderSendDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuSendDto> menus) {
         this.orderId = orderId;
         this.orderName = orderName;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
         this.status = status;
         this.menus = menus;
-        this.options = options;
     }
 
     public static OrderSendDto of(Order order, List<MenuSendDto> menus, List<OptionSendDto> options) {
@@ -37,7 +35,6 @@ public class OrderSendDto {
                 .storeId(order.getStoreId())
                 .status(order.getStatus())
                 .menus(menus)
-                .options(options)
                 .build();
     }
 }
