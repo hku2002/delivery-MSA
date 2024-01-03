@@ -21,17 +21,16 @@ public class OrderListenDto {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private List<MenuListenDto> menus;
-    private List<OptionListenDto> options;
+
 
     @Builder
-    public OrderListenDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuListenDto> menus, List<OptionListenDto> options) {
+    public OrderListenDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuListenDto> menus) {
         this.orderId = orderId;
         this.orderName = orderName;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
         this.status = status;
         this.menus = menus;
-        this.options = options;
     }
 
 }

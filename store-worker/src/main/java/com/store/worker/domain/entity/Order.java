@@ -1,6 +1,7 @@
 package com.store.worker.domain.entity;
 
 import com.store.worker.domain.enumtype.OrderStatus;
+import com.store.worker.dto.OrderListenDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,21 +27,27 @@ public class Order {
     @Column(nullable = false)
     private Long storeId;
 
-    @Column(nullable = false, length = 200)
-    private String storeName;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private OrderStatus status;
 
     @Builder
-    public Order(Long id, String name, int totalPrice, Long storeId, String storeName, OrderStatus status) {
+    public Order(Long id, String name, int totalPrice, Long storeId, OrderStatus status) {
         this.id = id;
         this.name = name;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
-        this.storeName = storeName;
         this.status = status;
+    }
+
+    public static Order from(OrderListenDto listenDto) {
+        return Order.builder()
+                .id(listenDto.getOrderId())
+                .name(listenDto.getOrderName())
+                .totalPrice(listenDto.getTotalPrice())
+                .storeId(listenDto.getStoreId())
+                .status(listenDto.getStatus())
+                .build();
     }
 
 }

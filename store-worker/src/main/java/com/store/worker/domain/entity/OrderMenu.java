@@ -1,11 +1,15 @@
 package com.store.worker.domain.entity;
 
+import com.store.worker.dto.MenuListenDto;
+import com.store.worker.dto.OrderListenDto;
 import com.store.worker.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @Entity
@@ -32,6 +36,21 @@ public class OrderMenu extends BaseEntity {
         this.name = name;
         this.price = price;
         this.order = order;
+    }
+
+    public static OrderMenu of(MenuListenDto menuListenDto, OrderListenDto orderListenDto) {
+        return OrderMenu.builder()
+                .id(menuListenDto.getMenuId())
+                .name(menuListenDto.getMenuName())
+                .price(menuListenDto.getMenuPrice())
+                .order(Order.from(orderListenDto))
+                .build();
+    }
+
+    public static List<OrderMenu> from(OrderListenDto orderListenDto) {
+        return orderListenDto.getMenus().stream()
+                .map(menuListenDto -> OrderMenu.of(menuListenDto, orderListenDto))
+                .toList();
     }
 
 }
