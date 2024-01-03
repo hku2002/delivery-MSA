@@ -26,9 +26,6 @@ public class Order {
     @Column(nullable = false)
     private Long storeId;
 
-    @Column(nullable = false, length = 200)
-    private String storeName;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private OrderStatus status;
@@ -39,7 +36,6 @@ public class Order {
         this.name = name;
         this.totalPrice = totalPrice;
         this.storeId = storeId;
-        this.storeName = storeName;
         this.status = status;
     }
 
