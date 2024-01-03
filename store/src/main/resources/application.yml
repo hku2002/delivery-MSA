@@ -32,3 +32,6 @@ logging:
 springdoc:
   swagger-ui:
     groups-order: DESC
+
+server:
+  port: 8003
