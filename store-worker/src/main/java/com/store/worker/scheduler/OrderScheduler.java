@@ -14,8 +14,8 @@ public class OrderScheduler {
     private final OrderReader orderReader;
 
     @Scheduled(fixedDelay = 10_000)
-    public void createOrderCheckSchedule() {
-        log.info("create order check scheduler started");
+    public void orderCompletedCheckSchedule() {
+        log.info("order completed check scheduler started");
         orderReader.readCompletedOrder();
     }
 
