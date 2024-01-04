@@ -17,7 +17,7 @@ public class OrderListener {
     private final ObjectMapper objectMapper;
     private final OrderProcessor orderProcessor;
 
-    @KafkaListener(topics = "order.completed", groupId = "store-group")
+    @KafkaListener(topics = "order.inbound", groupId = "store-group")
     public void consumeOrderCompletedTopic(String message) throws JsonProcessingException {
         log.info("message: {}", message);
         OrderCompletedListenDto orderCompletedListenDto = objectMapper.readValue(message, OrderCompletedListenDto.class);

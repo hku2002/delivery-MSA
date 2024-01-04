@@ -2,13 +2,15 @@ package com.order.worker.dto;
 
 import com.order.worker.domain.entity.Order;
 import com.order.worker.domain.enumtype.OrderStatus;
+import com.order.worker.global.common.dto.BaseSendDto;
+import com.order.worker.global.common.enumtype.Action;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-public class OrderSendDto {
+public class OrderSendDto extends BaseSendDto {
 
     private Long orderId;
     private String orderName;
@@ -18,7 +20,8 @@ public class OrderSendDto {
     private List<MenuSendDto> menus;
 
     @Builder
-    public OrderSendDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuSendDto> menus) {
+    public OrderSendDto(Long orderId, String orderName, int totalPrice, Long storeId, OrderStatus status, List<MenuSendDto> menus, Action action) {
+        super(action);
         this.orderId = orderId;
         this.orderName = orderName;
         this.totalPrice = totalPrice;
@@ -35,6 +38,7 @@ public class OrderSendDto {
                 .storeId(order.getStoreId())
                 .status(order.getStatus())
                 .menus(menus)
+                .action(Action.REQUESTED_BY_USER)
                 .build();
     }
 }

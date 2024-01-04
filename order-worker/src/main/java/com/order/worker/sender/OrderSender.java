@@ -18,7 +18,7 @@ public class OrderSender {
 
     private final KafkaTemplate<String, OrderSendDto> kafkaTemplate;
     private final OrderWriter orderWriter;
-    private static final String ORDER_CREATE_TOPIC_NAME = "order.create";
+    private static final String ORDER_CREATE_TOPIC_NAME = "order.outbound";
 
     @Transactional
     public void orderSend(OrderSendDto sendDto) {
