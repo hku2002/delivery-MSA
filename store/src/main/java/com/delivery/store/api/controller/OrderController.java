@@ -6,7 +6,7 @@ import com.delivery.store.api.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +15,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping("/order/{id}")
+    @PutMapping("/order/{id}")
     public ResponseEntity<BaseResponse<String>> changeOrderComplete(@PathVariable long id) {
         orderService.changeOrderComplete(id);
         return CommonResponse.success("");
