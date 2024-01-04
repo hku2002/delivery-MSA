@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum OrderStatus {
     REQUEST,
-    SENT,
     COMPLETED,
+    COMPLETED_SENT,
     CANCELED_BY_STORE,
     CANCELED_BY_USER
 }
