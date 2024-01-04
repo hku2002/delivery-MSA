@@ -3,6 +3,7 @@ package com.order.worker.listener;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.order.worker.dto.OrderCompletedListenDto;
+import com.order.worker.global.common.enumtype.Action;
 import com.order.worker.processor.OrderProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,10 @@ public class OrderListener {
         log.info("message: {}", message);
         OrderCompletedListenDto orderCompletedListenDto = objectMapper.readValue(message, OrderCompletedListenDto.class);
         log.info("orderId: {}", orderCompletedListenDto.getOrderId());
+        if (!Action.COMPLETED_BY_STORE.equals(orderCompletedListenDto.getAction())) {
+            log.info("skip");
+            return;
+        }
         Long orderId = orderProcessor.completeOrderProcess(orderCompletedListenDto);
         log.info("finished orderID: {}", orderId);
     }
