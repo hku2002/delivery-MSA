@@ -17,7 +17,7 @@ public class OrderSender {
 
     private final KafkaTemplate<String, OrderCompletedSendDto> kafkaTemplate;
     private final OrderWriter orderWriter;
-    private static final String ORDER_COMPLETED_TOPIC_NAME = "order.completed";
+    private static final String ORDER_COMPLETED_TOPIC_NAME = "order.inbound";
 
     public void orderSend(OrderCompletedSendDto orderCompletedSendDto) {
         CompletableFuture<SendResult<String, OrderCompletedSendDto>> future = kafkaTemplate.send(ORDER_COMPLETED_TOPIC_NAME, orderCompletedSendDto);
