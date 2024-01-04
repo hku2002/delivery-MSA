@@ -23,10 +23,10 @@ public class OrderSender {
         CompletableFuture<SendResult<String, OrderCompletedSendDto>> future = kafkaTemplate.send(ORDER_COMPLETED_TOPIC_NAME, orderCompletedSendDto);
         future.whenComplete((result, ex) -> {
             if (ex == null) {
-                log.info("order.create message send success!");
+                log.info("order completed message send success!");
                 orderWriter.completedSentOrder(orderCompletedSendDto);
             } else {
-                log.error("order.create message send fail!");
+                log.error("order completed message send fail!");
             }
         });
     }
