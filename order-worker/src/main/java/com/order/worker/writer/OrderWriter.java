@@ -7,15 +7,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class OrderWriter {
 
     private final OrderRepository orderRepository;
 
-    @Transactional
     public void changeOrderStatusSent(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow();
         order.changStatusSent();
     }
 
+    public Long changeOrderStatusCompleted(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.changStatusCompleted();
+        return order.getId();
+    }
 }

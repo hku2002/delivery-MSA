@@ -50,4 +50,11 @@ public class Order {
         this.status = OrderStatus.SENT;
     }
 
+    public void changStatusCompleted() {
+        if (this.status != OrderStatus.SENT) {
+            throw new IllegalStateException();
+        }
+        this.status = OrderStatus.COMPLETED_BY_STORE;
+    }
+
 }
