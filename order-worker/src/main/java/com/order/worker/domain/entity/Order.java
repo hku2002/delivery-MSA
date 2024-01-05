@@ -47,11 +47,11 @@ public class Order {
         if (this.status != OrderStatus.REQUEST) {
             throw new IllegalStateException();
         }
-        this.status = OrderStatus.SENT;
+        this.status = OrderStatus.SENT_REQUEST;
     }
 
     public void changStatusCompleted() {
-        if (this.status != OrderStatus.SENT) {
+        if (this.status != OrderStatus.SENT_CANCEL) {
             throw new IllegalStateException();
         }
         this.status = OrderStatus.COMPLETED_BY_STORE;
