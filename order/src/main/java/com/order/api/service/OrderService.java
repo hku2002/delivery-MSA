@@ -3,6 +3,8 @@ package com.order.api.service;
 import com.order.api.domain.entity.Order;
 import com.order.api.domain.entity.OrderMenu;
 import com.order.api.domain.repository.OrderMenuOptionRepository;
+import com.order.api.domain.repository.OrderRepository;
+import com.order.api.dto.OrderCancelRequestDto;
 import com.order.api.dto.OrderRequestDto;
 import com.order.api.dto.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class OrderService {
 
+    private final OrderRepository orderRepository;
     private final OrderMenuOptionRepository orderMenuOptionRepository;
 
     @Transactional
@@ -30,6 +33,13 @@ public class OrderService {
             orderMenuOptionRepository.saveAll(orderMenu.getOrderMenuOptions());
         });
 
+        return new OrderResponseDto(order.getId());
+    }
+
+    @Transactional
+    public OrderResponseDto cancelOrder(OrderCancelRequestDto orderCancelRequestDto) {
+        Order order = orderRepository.findById(orderCancelRequestDto.getOrderId()).orElseThrow();
+        order.cancel();
         return new OrderResponseDto(order.getId());
     }
 

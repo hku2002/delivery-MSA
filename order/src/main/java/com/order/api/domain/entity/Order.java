@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static com.order.api.domain.enumtype.OrderStatus.*;
+
 @Getter
 @Entity
 @Table(name = "orders")
@@ -50,7 +52,7 @@ public class Order {
         return Order.builder()
                 .storeId(requestDto.getStoreId())
                 .storeName(requestDto.getStoreName())
-                .status(OrderStatus.REQUEST)
+                .status(REQUEST)
                 .build();
     }
 
@@ -74,5 +76,13 @@ public class Order {
                 .sum();
 
         this.totalPrice = optionTotalPrice + menuTotalPrice;
+    }
+
+    public void cancel() {
+        if (!this.status.equals(REQUEST) && !this.status.equals(SENT)) {
+            throw new IllegalStateException();
+        }
+
+        this.status = CANCELED_BY_USER;
     }
 }
