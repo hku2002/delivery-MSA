@@ -19,4 +19,10 @@ public class OrderScheduler {
         orderReader.readRequestedOrder();
     }
 
+    @Scheduled(fixedDelay = 10_000)
+    public void cancelOrderCheckSchedule() {
+        log.info("cancel order check scheduler started");
+        orderReader.readCanceledOrder();
+    }
+
 }

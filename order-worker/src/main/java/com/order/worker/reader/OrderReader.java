@@ -1,8 +1,10 @@
 package com.order.worker.reader;
 
+import com.order.worker.domain.entity.Order;
 import com.order.worker.domain.entity.OrderMenuOption;
 import com.order.worker.domain.enumtype.OrderStatus;
 import com.order.worker.domain.repository.OrderMenuOptionRepository;
+import com.order.worker.domain.repository.OrderRepository;
 import com.order.worker.processor.OrderProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class OrderReader {
 
+    private final OrderRepository orderRepository;
     private final OrderMenuOptionRepository orderMenuOptionRepository;
     private final OrderProcessor orderProcessor;
 
@@ -29,4 +32,12 @@ public class OrderReader {
         orderProcessor.createOrderSendDto(orderMenuOptions);
     }
 
+    public void readCanceledOrder() {
+        List<Order> orders = orderRepository.findAllByStatus(OrderStatus.CANCELED_BY_USER);
+        if (orders.isEmpty()) {
+            log.info("cancelOrderEmpty");
+            return;
+        }
+        orderProcessor.cancelOrderSendProcess(orders);
+    }
 }

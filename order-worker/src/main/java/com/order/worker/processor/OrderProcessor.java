@@ -2,10 +2,7 @@ package com.order.worker.processor;
 
 import com.order.worker.domain.entity.Order;
 import com.order.worker.domain.entity.OrderMenuOption;
-import com.order.worker.dto.MenuSendDto;
-import com.order.worker.dto.OptionSendDto;
-import com.order.worker.dto.OrderCompletedListenDto;
-import com.order.worker.dto.OrderSendDto;
+import com.order.worker.dto.*;
 import com.order.worker.sender.OrderSender;
 import com.order.worker.writer.OrderWriter;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +27,9 @@ public class OrderProcessor {
 
     public Long completeOrderProcess(OrderCompletedListenDto orderCompletedListenDto) {
         return orderWriter.changeOrderStatusCompleted(orderCompletedListenDto.getOrderId());
+    }
+
+    public void cancelOrderSendProcess(List<Order> orders) {
+        orderSender.orderCancelSend(OrderCancelSendDto.from(orders));
     }
 }
