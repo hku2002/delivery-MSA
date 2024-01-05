@@ -2,6 +2,7 @@ package com.store.worker.processor;
 
 import com.store.worker.domain.entity.Order;
 import com.store.worker.domain.entity.OrderMenuOption;
+import com.store.worker.dto.OrderCancelListenDto;
 import com.store.worker.dto.OrderCompletedSendDto;
 import com.store.worker.dto.OrderListenDto;
 import com.store.worker.sender.OrderSender;
@@ -21,5 +22,8 @@ public class OrderProcessor {
 
     public void createOrderCompletedSendDto(Order order) {
         orderSender.orderSend(OrderCompletedSendDto.from(order));
+    }
+
+    public void cancelOrderProcess(OrderCancelListenDto orderCancelListenDto) {
     }
 }
